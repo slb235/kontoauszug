@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { hashHistory } from 'react-router';
 import { routerMiddleware, push } from 'react-router-redux';
 import createLogger from 'redux-logger';
+import persistState from 'redux-localstorage';
 import rootReducer from '../reducers';
 
 import * as counterActions from '../actions/counter';
@@ -30,7 +31,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
   compose;
 /* eslint-enable no-underscore-dangle */
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk, router, logger)
+  applyMiddleware(thunk, router, logger),
+  persistState()
 );
 
 export default function configureStore(initialState?: counterStateType) {

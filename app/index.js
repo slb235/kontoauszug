@@ -3,9 +3,12 @@ import { render } from 'react-dom';
 import { hashHistory } from 'react-router';
 import { AppContainer } from 'react-hot-loader';
 import { syncHistoryWithStore } from 'react-router-redux';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import Root from './containers/Root';
 import configureStore from './store/configureStore';
 import './app.global.css';
+
+injectTapEventPlugin();
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);

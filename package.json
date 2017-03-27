@@ -29,8 +29,8 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "Kontoauszug",
+    "appId": "de.actionbound.Kontoauszug",
     "category": "public.app-category.tools",
     "dmg": {
       "contents": [
@@ -175,16 +175,23 @@
     "webpack-merge": "^2.4.0"
   },
   "dependencies": {
+    "csv": "^1.1.1",
     "electron-debug": "^1.1.0",
     "extract-text-webpack-plugin": "^2.0.0",
     "font-awesome": "^4.7.0",
+    "iconv-lite": "^0.4.15",
+    "material-ui": "latest",
+    "moment": "^2.18.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-dropzone": "^3.12.2",
     "react-hot-loader": "3.0.0-beta.6",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.7",
+    "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
+    "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.2.0",
     "source-map-support": "^0.4.10"
   },
