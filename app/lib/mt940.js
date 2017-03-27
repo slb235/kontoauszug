@@ -23,8 +23,8 @@ export const writeMT940 = (account, startSaldo, transactions, filter) => {
   output += transactions.map((transaction) => {
     endDate = transaction.date;
     saldo += transaction.value;
-    return line('61', `${moment(transaction.date).format('YYMMDD')}${cd(transaction.value)}${num(transaction.value)}NMSC`) +
-      line('86', `999${filter(transaction.description)}`);
+    return line('61', `${moment(transaction.date).format('YYMMDD')}${transaction.entry_date ? moment(transaction.entry_date).format('MMDD') : ''}${cd(transaction.value)}${num(transaction.value)}NMSC`) +
+      line('86', `999${filter ? filter(transaction.description) : transaction.description}`);
   }).join('');
   output += line('62F', saldoLine(saldo, endDate));
   return iconv.encode(output, 'latin-1');

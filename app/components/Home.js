@@ -21,9 +21,11 @@ export default class Home extends Component {
             <img src={paypalImage} alt="PayPal" />
           </GridTile>
         </Link>
-        <GridTile title="Stripe">
-          <img src={stripeImage} alt="Stripe" />
-        </GridTile>
+        <Link to="/stripe">
+          <GridTile title="Stripe">
+            <img src={stripeImage} alt="Stripe" />
+          </GridTile>
+        </Link>
         <Link to="/settings">
           <GridTile title="Einstellungen">
             <img src={settingsImage} alt="Einstellungen" />

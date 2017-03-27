@@ -7,6 +7,7 @@ import CounterPage from './containers/CounterPage';
 import SettingsPage from './containers/SettingsPage';
 import FidorPage from './containers/FidorPage';
 import PaypalPage from './containers/PaypalPage';
+import StripePage from './containers/StripePage';
 
 export default (
   <Route path="/" component={App}>
@@ -15,5 +16,6 @@ export default (
     <Route path="/settings" component={SettingsPage} />
     <Route path="/fidor" component={FidorPage} />
     <Route path="/paypal" component={PaypalPage} />
+    <Route path="/stripe" component={StripePage} />
   </Route>
 );
