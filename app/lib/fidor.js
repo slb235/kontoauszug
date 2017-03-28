@@ -13,16 +13,17 @@ export const parseCSV = (data, callback) => {
         return;
       }
       callback(null, rows.reverse().map((row) => {
-        const split = row[2].split(', ');
+        // const split = row[2].split(', ');
         return {
           date: moment(row[0], 'DD.MM.YYYY').toDate(),
           description: row[1],
-          value: parseFloat(row[3].replace(',', '.')),
+          value: parseFloat(row[3].replace(',', '.')) 
+          /* ,
           from: {
             name: split[0].split(': ')[1],
             account: split[1].split(': ')[1],
             bank: split[2] ? split[2].split(': ')[1] : ''
-          }
+          }*/
         };
       }));
     });

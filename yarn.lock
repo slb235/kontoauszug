@@ -322,12 +322,6 @@ async@^2.1.2, async@^2.1.4:
   dependencies:
     lodash "^4.14.0"
 
-async@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/async/-/async-2.2.0.tgz#c324eba010a237e4fbd55a12dee86367d5c0ef32"
-  dependencies:
-    lodash "^4.14.0"
-
 async@~0.2.6:
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
@@ -1424,10 +1418,6 @@ bcrypt-pbkdf@^1.0.0:
 beeper@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/beeper/-/beeper-1.1.1.tgz#e6d5ea8c5dad001304a70b22638447f69cb2f809"
-
-bellajs@6.x.x:
-  version "6.4.3"
-  resolved "https://registry.yarnpkg.com/bellajs/-/bellajs-6.4.3.tgz#d7deb9c3dc52bd395c830d9b8b72c82bf490c408"
 
 big.js@^3.1.3:
   version "3.1.3"
@@ -5534,6 +5524,10 @@ num2fraction@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"
 
+number-formatter@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/number-formatter/-/number-formatter-1.2.0.tgz#1cf99f371fee627be9f5f12fdac79ecb31b88a0f"
+
 number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
@@ -5795,14 +5789,6 @@ path-type@^1.0.0:
     graceful-fs "^4.1.2"
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
-
-paypal-nvp-api@^1.2.27:
-  version "1.2.27"
-  resolved "https://registry.yarnpkg.com/paypal-nvp-api/-/paypal-nvp-api-1.2.27.tgz#10d7d3ee1937c19e4c52ac8ff6aa7fff6e7a9679"
-  dependencies:
-    bellajs "6.x.x"
-    promise.prototype.finally "2.x.x"
-    request "2.x.x"
 
 pbkdf2@^3.0.3:
   version "3.0.9"
@@ -6166,14 +6152,6 @@ progress-stream@^1.1.0:
 progress@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
-
-promise.prototype.finally@2.x.x:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/promise.prototype.finally/-/promise.prototype.finally-2.0.1.tgz#b70d44ceb3825fa88004b5d1fbd906b3b7d9b758"
-  dependencies:
-    define-properties "^1.1.2"
-    es-abstract "^1.6.1"
-    function-bind "^1.1.0"
 
 promise@^7.1.1:
   version "7.1.1"
@@ -6682,7 +6660,7 @@ request@2.55.0:
     tough-cookie ">=0.12.0"
     tunnel-agent "~0.4.0"
 
-request@2.79.0, request@2.x.x, request@^2.45.0, request@^2.65.0, request@^2.69.0, request@^2.79.0:
+request@2.79.0, request@^2.45.0, request@^2.65.0, request@^2.69.0, request@^2.79.0:
   version "2.79.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:

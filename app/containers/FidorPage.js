@@ -64,6 +64,8 @@ class FidorPage extends Component {
         style={styles.dropZone}
         activeStyle={styles.dropZoneActive}
         onDrop={this.handleFileDrop}
+        accept="text/csv"
+        disablePreview
       >
         <Layout>
           <RaisedButton

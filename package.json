@@ -175,7 +175,6 @@
     "webpack-merge": "^2.4.0"
   },
   "dependencies": {
-    "async": "^2.2.0",
     "csv": "^1.1.1",
     "electron-debug": "^1.1.0",
     "extract-text-webpack-plugin": "^2.0.0",
@@ -183,7 +182,7 @@
     "iconv-lite": "^0.4.15",
     "material-ui": "latest",
     "moment": "^2.18.1",
-    "paypal-nvp-api": "^1.2.27",
+    "number-formatter": "^1.2.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-dropzone": "^3.12.2",
