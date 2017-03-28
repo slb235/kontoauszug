@@ -6,6 +6,7 @@ import filter from './filter';
 import settings from './settings';
 import fidor from './fidor';
 import stripe from './stripe';
+import paypal from './paypal';
 
 const rootReducer = combineReducers({
   counter,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   settings,
   fidor,
   stripe,
+  paypal,
   routing
 });
 

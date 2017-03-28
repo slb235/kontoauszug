@@ -10,59 +10,42 @@ import ContentCloudDownload from 'material-ui/svg-icons/file/cloud-download';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 import FileDownload from 'material-ui/svg-icons/file/file-download';
+import FileUpload from 'material-ui/svg-icons/file/file-upload';
 import { red900, green900 } from 'material-ui/styles/colors';
 import Layout from '../components/Layout';
-import * as StripeActions from '../actions/stripe';
+import * as PaypalActions from '../actions/paypal';
 
 const formatDate = (date) => (moment(date).format('DD.MM.YYYY'));
 
-class StripePage extends Component {
-  handleFromChange = (event, date) => {
-    this.props.setFrom(date);
+const styles = {
+  button: {
+    marginLeft: '1em'
   }
+};
 
-  handleToChange = (event, date) => {
-    this.props.setTo(date);
-  }
-
-  handleFetchData = () => {
-    this.props.fetchTransactions(
-      this.props.settings.stripeKey,
-      this.props.stripe.from,
-      this.props.stripe.to
-      );
-  }
-
-  handleSaveFile = () => {
-    this.props.saveStripeFile(
-      this.props.settings.stripeAccount,
-      this.props.stripe.transactionList
-    );
-  }
+class PaypalPage extends Component {
 
 
   render() {
     let lastDate;
-    let balance = 0;
     return (
       <Layout>
-        <DatePicker hintText="Von" formatDate={formatDate} value={this.props.stripe.from ? new Date(this.props.stripe.from) : undefined} onChange={this.handleFromChange} />
-        <DatePicker hintText="Bis" formatDate={formatDate} value={this.props.stripe.to ? new Date(this.props.stripe.to) : undefined} onChange={this.handleToChange} />
         <RaisedButton
-          label="Transaktionen laden"
+          label="CSV öffnen"
           primary
-          icon={<ContentCloudDownload />}
-          onTouchTap={this.handleFetchData}
+          icon={<FileUpload />}
+          style={styles.button}
+          onTouchTap={this.props.openPaypalFile}
         />
         <RaisedButton
           label="MT940 export"
           secondary
           icon={<FileDownload />}
+          style={styles.button}
           onTouchTap={this.handleSaveFile}
         />
         <List>
-          {this.props.stripe.transactionList.map((transaction) => {
-            balance += transaction.value;
+          {this.props.paypal.transactionList.map((transaction) => {
             // const description = filter(transaction.description);
             let dateHeader = null;
             if (moment(transaction.date).format('DD.MM.YYYY') !== moment(lastDate).format('DD.MM.YYYY')) {
@@ -91,7 +74,7 @@ class StripePage extends Component {
                     </div>
                   )}
                   secondaryText={transaction.description}
-                  rightToggle={<span>{balance.toFixed(2)}</span>}
+                  rightToggle={<span>{transaction.balance.toFixed(2).replace('.', ',')}</span>}
                 />
               </div>);
           })}
@@ -105,13 +88,13 @@ class StripePage extends Component {
 function mapStateToProps(state) {
   return {
     settings: state.settings,
-    stripe: state.stripe
+    paypal: state.paypal
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...StripeActions }, dispatch);
+  return bindActionCreators({ ...PaypalActions }, dispatch);
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(StripePage);
+export default connect(mapStateToProps, mapDispatchToProps)(PaypalPage);

@@ -32,10 +32,6 @@ class Settings extends Component {
         <TextField floatingLabelText="Stripe" fullWidth value={this.props.settings.stripeAccount} name="stripeAccount" onChange={this.handleSettingChange} style={styles.textField} />
         <Subheader style={styles.subheader}>Stripe</Subheader>
         <TextField floatingLabelText="Stripe API Key" fullWidth value={this.props.settings.stripeKey} name="stripeKey" onChange={this.handleSettingChange} style={styles.textField} />
-        <Subheader style={styles.subheader}>Paypal</Subheader>
-        <TextField floatingLabelText="Paypal API Nutzername" fullWidth value={this.props.settings.paypalUsername} name="paypalUsername" onChange={this.handleSettingChange} style={styles.textField} />
-        <TextField floatingLabelText="Paypal API Password" fullWidth value={this.props.settings.paypalPassword} type="password" name="paypalPassword" onChange={this.handleSettingChange} style={styles.textField} />
-        <TextField floatingLabelText="Paypal API Signatur" fullWidth value={this.props.settings.paypalSignature} name="paypalSignature" onChange={this.handleSettingChange} style={styles.textField} />
 
         <Subheader style={styles.subheader}>Verwendungszweck filtern</Subheader>
         <FilterEditor
