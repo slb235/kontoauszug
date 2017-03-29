@@ -3,7 +3,10 @@ import Header from '../components/Header';
 
 const styles = {
   bodyWrapper: {
-    margin: '75px 1em'
+    marginTop: '64px',
+    padding: '1em 2em 1em 1em',
+    overflowY: 'auto',
+    height: 'calc(100vh - 64px)'
   },
   header: {
     position: 'fixed',

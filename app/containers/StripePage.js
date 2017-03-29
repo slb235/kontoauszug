@@ -4,19 +4,27 @@ import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
-import Subheader from 'material-ui/Subheader';
-import { List, ListItem } from 'material-ui/List';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 import ContentCloudDownload from 'material-ui/svg-icons/file/cloud-download';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import ContentRemove from 'material-ui/svg-icons/content/remove';
 import FileDownload from 'material-ui/svg-icons/file/file-download';
-import { red900, green900 } from 'material-ui/styles/colors';
 import Layout from '../components/Layout';
+import TransactionList from '../components/TransactionList';
 import * as StripeActions from '../actions/stripe';
 
 const formatDate = (date) => (moment(date).format('DD.MM.YYYY'));
 
+const styles = {
+  button: {
+    marginLeft: '1em'
+  }
+};
+
 class StripePage extends Component {
+  state = {
+    open: false,
+  };
+
   handleFromChange = (event, date) => {
     this.props.setFrom(date);
   }
@@ -26,6 +34,7 @@ class StripePage extends Component {
   }
 
   handleFetchData = () => {
+    this.handleCloseDialog();
     this.props.fetchTransactions(
       this.props.settings.stripeKey,
       this.props.stripe.from,
@@ -40,62 +49,59 @@ class StripePage extends Component {
     );
   }
 
+  handleOpenDialog = () => {
+    this.setState({ open: true });
+  }
+
+  handleCloseDialog = () => {
+    this.setState({ open: false });
+  };
+
 
   render() {
-    let lastDate;
-    let balance = 0;
+    const actions = [
+      <FlatButton
+        label="Abbrechen"
+        onTouchTap={this.handleCloseDialog}
+      />,
+      <FlatButton
+        label="Laden"
+        primary
+        disabled={!this.props.stripe.from || !this.props.stripe.to}
+        onTouchTap={this.handleFetchData}
+      />,
+    ];
+
+
     return (
       <Layout>
-        <DatePicker hintText="Von" formatDate={formatDate} value={this.props.stripe.from ? new Date(this.props.stripe.from) : undefined} onChange={this.handleFromChange} />
-        <DatePicker hintText="Bis" formatDate={formatDate} value={this.props.stripe.to ? new Date(this.props.stripe.to) : undefined} onChange={this.handleToChange} />
         <RaisedButton
           label="Transaktionen laden"
           primary
           icon={<ContentCloudDownload />}
-          onTouchTap={this.handleFetchData}
+          onTouchTap={this.handleOpenDialog}
+          style={styles.button}
+          disabled={!this.props.settings.stripeKey}
         />
         <RaisedButton
           label="MT940 export"
           secondary
           icon={<FileDownload />}
           onTouchTap={this.handleSaveFile}
+          style={styles.button}
+          disabled={this.props.stripe.transactionList.length === 0 || !this.props.settings.stripeAccount}
         />
-        <List>
-          {this.props.stripe.transactionList.map((transaction) => {
-            balance += transaction.value;
-            // const description = filter(transaction.description);
-            let dateHeader = null;
-            if (moment(transaction.date).format('DD.MM.YYYY') !== moment(lastDate).format('DD.MM.YYYY')) {
-              lastDate = transaction.date;
-              dateHeader = (<Subheader>{moment(lastDate).format('DD.MM.YYYY')}</Subheader>);
-            }
-            // const invoiceNr = findInvoiceNumber(description);
-            // let invoiceNrChip = null;
-            // if (invoiceNr) {
-            // invoiceNrChip = (<Chip style={{ display: 'inline-flex', margin: '0 1em' }}><Avatar color={green900} icon={<ContentInbox />} />{invoiceNr}</Chip>);
-            // }
+        <TransactionList transactions={this.props.stripe.transactionList} />
+        <Dialog
+          title="Transactionen laden"
+          actions={actions}
+          modal
+          open={this.state.open}
+        >
+          <DatePicker floatingLabelText="Von" formatDate={formatDate} value={this.props.stripe.from ? new Date(this.props.stripe.from) : undefined} onChange={this.handleFromChange} />
+          <DatePicker floatingLabelText="Bis" formatDate={formatDate} value={this.props.stripe.to ? new Date(this.props.stripe.to) : undefined} onChange={this.handleToChange} />
+        </Dialog>
 
-            return (
-              <div key={transaction.description}>
-                {dateHeader}
-                <ListItem
-                  leftIcon={
-                    transaction.value > 0 ?
-                      <ContentAdd color={green900} />
-                    : <ContentRemove color={red900} />
-                  }
-                  primaryText={(
-                    <div>
-                      <span>{Math.abs(transaction.value).toFixed(2).replace('.', ',')}</span>
-                      {/* invoiceNrChip */}
-                    </div>
-                  )}
-                  secondaryText={transaction.description}
-                  rightToggle={<span>{balance.toFixed(2)}</span>}
-                />
-              </div>);
-          })}
-        </List>
       </Layout>
     );
   }

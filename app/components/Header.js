@@ -8,6 +8,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { goBack, push } from 'react-router-redux';
 
+const styles = {
+  bar: {
+    WebkitUserSelect: 'none',
+    WebkitAppRegion: 'drag'
+  },
+  button: {
+    WebkitAppRegion: 'no-drag'
+  }
+};
+
 class Header extends Component {
   static exitApp() {
     electron.remote.app.quit();
@@ -45,9 +55,9 @@ class Header extends Component {
         title={title}
         showMenuIconButton={!isIndex}
         iconElementLeft={isIndex ? null :
-        <IconButton onTouchTap={this.props.actions.goBack}><NavigationArrowBack /></IconButton>}
-        iconElementRight={<IconButton onTouchTap={Header.exitApp}><NavigationClose /></IconButton>}
-        style={{ ...this.props.style, backgroundColor: color }}
+        <IconButton onTouchTap={this.props.actions.goBack} style={styles.button}><NavigationArrowBack /></IconButton>}
+        iconElementRight={<IconButton onTouchTap={Header.exitApp} style={styles.button}><NavigationClose /></IconButton>}
+        style={{ ...this.props.style, ...styles.bar, backgroundColor: color }}
       />
     );
   }

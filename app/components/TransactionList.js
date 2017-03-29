@@ -31,6 +31,8 @@ class TransactionList extends Component {
   render() {
     const { transactions, filter, startBalance } = this.props;
     let lastDate;
+    let balance = startBalance || 0;
+
     return (
       <List>
         {transactions.map((transaction) => {
@@ -46,14 +48,16 @@ class TransactionList extends Component {
             invoiceNrChip = (<Chip style={{ display: 'inline-flex', margin: '0 1em' }}><Avatar color={green900} icon={<ContentInbox />} />{invoiceNr}</Chip>);
           }
 
+          balance += transaction.value;
+
           return (
             <div key={description}>
               {dateHeader}
               <ListItem
                 leftIcon={
                   transaction.value > 0 ?
-                    <ContentAdd color={green900} />
-                  : <ContentRemove color={red900} />
+                    <ContentAdd style={{ top: '16px' }} color={green900} />
+                  : <ContentRemove style={{ top: '16px' }} color={red900} />
                 }
                 primaryText={(
                   <div>
@@ -62,7 +66,7 @@ class TransactionList extends Component {
                   </div>
                 )}
                 secondaryText={description}
-                rightToggle={<span style={styles.balance}>{formatCurrency(transaction.balance)}</span>}
+                rightToggle={<span style={styles.balance}>{formatCurrency(transaction.balance ? transaction.balance : balance)}</span>}
               />
             </div>);
         })}
