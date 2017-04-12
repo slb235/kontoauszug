@@ -9,12 +9,7 @@ import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 import moment from 'moment';
 import formatter from 'number-formatter';
-
-
-const findInvoiceNumber = (text) => {
-  const result = text.match(/\bRE-AB-\d{6}-\d{4,5}\b/);
-  return result ? result[0] : null;
-};
+import { findInvoiceNumber } from '../lib/fidor'
 
 const formatDate = (date) => (moment(date).format('DD.MM.YYYY'));
 const formatCurrency = (num) => (formatter('#.##0,00', num));

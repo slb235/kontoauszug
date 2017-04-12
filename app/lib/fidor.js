@@ -40,6 +40,6 @@ export const parseCSVFile = (file, callback) => {
 };
 
 export const findInvoiceNumber = (text) => {
-  const result = text.match(/\bRE-AB-\d{6}-\d{4,5}\b/);
+  const result = text.match(/(?:^|\s)RE-AB-\d{6}-\d{4,5}(?:$|\s)/);
   return result ? result[0] : null;
 };
