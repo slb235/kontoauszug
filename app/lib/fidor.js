@@ -17,7 +17,7 @@ export const parseCSV = (data, callback) => {
         return {
           date: moment(row[0], 'DD.MM.YYYY').toDate(),
           description: row[1],
-          value: parseFloat(row[3].replace(',', '.')) 
+          value: parseFloat(row[3].replace('.', '').replace(',', '.'))
           /* ,
           from: {
             name: split[0].split(': ')[1],
