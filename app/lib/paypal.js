@@ -62,6 +62,15 @@ export const parseCSV = (data, callback) => {
               balance
             });
             break;
+          case 'Allgemeine Zahlung':
+          case 'PayPal Express-Zahlung':
+            outTransactions.push({
+              date: transactionDate(transaction),
+              value: parseNumber(transaction.brutto),
+              description: `${transaction.transaktionscode} ${transaction.name}`,
+              balance: balance
+            })
+            break;          
           case 'Website-Zahlung':
             let feeTransaction;
             if (transaction['gebüHr'] !== '0,00') {
