@@ -5,7 +5,7 @@ import moment from 'moment';
 
 export const parseCSV = (data, callback) => {
   csv.parse(
-    iconv.decode(data, 'latin-1'),
+    data /* iconv.decode(data, 'latin-1') */,
     { delimiter: ';', from: 2 },
     (error, rows) => {
       if (error) {
